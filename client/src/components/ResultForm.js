@@ -2,6 +2,7 @@
 import React, {useState,useContext,useEffect } from 'react';
 import { FormContext } from './FormContext';
 import axios from "axios";
+import {handleError} from "./../Utils";
 
 
 function ResultForm() {
@@ -40,7 +41,8 @@ function ResultForm() {
        })
        .then((response)=>{
          if(response.status === 201){
-          console.log(response)
+          console.log(response);
+          setError([])
           fetchEvents();
           return;
          }
@@ -56,13 +58,10 @@ function ResultForm() {
          console.log(error)
        });
     }
-  
-   const handleError =(field)=>{
-      return errors
-      .filter((error) => error.field === field)
-      .map(error=>(<strong key={error.id} style={{color:"red"}}>{error.message}</strong>))
-   }
 
+  const handleErrorForField = (field)=>{
+    return handleError(errors, field);
+ }
 
 return(
   <div className="container">
@@ -84,7 +83,7 @@ return(
           onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
-      {handleError("firstName")}
+      {handleErrorForField("firstName")}
       {/* {console.log(errors)} */}
       {/* {error ? (
               <strong className="d-flex justify-content-center">
@@ -105,7 +104,7 @@ return(
           onChange={(e) => setLastName(e.target.value)}
         />
       </div>
-      {handleError("lastName")}
+      {handleErrorForField("lastName")}
       {/* {error ? (
               <strong className="d-flex justify-content-center">
                 <span style={{ color: "red" }}>Last name need</span>
@@ -125,7 +124,7 @@ return(
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      {handleError("email")}
+      {handleErrorForField("email")}
       <div className="form-group">
         <label className="label">
           <b>Data Picker</b>
