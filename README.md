@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# Wprowadzenie:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Stworzyłem prosty formularz zaimplementowany w React'cie
+i połączyłem z API napisanym w Node.js (Express.js), z wykorzystaniem Bazy MySQL.
 
-## Available Scripts
+## Technologie:
 
-In the project directory, you can run:
+-React: 17.0.2,
+-Node: 12.16.1,
+-Express: 4.17.1
 
-### `yarn start`
+## Tworzenie bazy danych:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Należy skorzystać z klienta bazy danych MySQL serwer phpMyAdmin,
+wejść na stronę : http://localhost/phpmyadmin/index.php,
+następnie w polu do zapytań(queries) - SQL, należy wkleić kod zapisany w folderze serwer/database.sql
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Uruchomienie aplikacji dla back-end'u:
 
-### `yarn test`
+Po pobraniu aplikacji, aby uruchomić serwer, w głównej ścieżce projektu, należy wpisać:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+cd server
+```
 
-### `yarn build`
+następnie zainstalować zależności node.modules:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+następnie aby uruchowmić serwer:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+node server.js
+```
 
-### `yarn eject`
+## Uruchomienie aplikacji dla front-end'u:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Po uruchomienia aplikacji backendowej, aby uruchomić aplikacje frontendową, w nowym terminalu należy wpisać:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+cd client
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+następnie zainstalować zależności node.modules:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+następnie uruchomić aplikacje:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testy dla back-endu/ server:
 
-### Code Splitting
+Ścieżka gdzie znajdują się testy: server/test/app.test.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Robimy kilka testów dla metody GET/POST a w niej m.in:
+dla metody POST:
 
-### Analyzing the Bundle Size
+- testy dla tworzenia użytkownika - status 201,
+- testy dla obiektu json zawierającego event id
+- testy dla formatu jaki ma być zwracany z serwera
+- testy dla walidacji: (m.in dla pustych pól i dla  
+  nieistniejących pól)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+dla metody GET:
 
-### Making a Progressive Web App
+- zwracanie wszystkich obiektów
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Aby uruchomić test należy w głównej ścieżce projektu pierw wpisać:
 
-### Advanced Configuration
+```bash
+cd server
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+a następnie komende dla testów:
 
-### Deployment
+```bash
+npx jest
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Test dla front-endu/ client:
 
-### `yarn build` fails to minify
+Ścieżka gdzie znajduje się test: client/test/Utils.test.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Testujemy metodę, która nam renderuje komunikat błędu.
+Ze względu na prosty formularz do tworzenia eventu, stworzyłem tylko jeden test.
+
+Aby uruchomić test należy w głównej ścieżce projektu pierw wpisać:
+
+```bash
+cd client
+```
+
+a następnie komende dla testu:
+
+```bash
+npm test
+```
