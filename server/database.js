@@ -38,5 +38,5 @@ mapRow = (row) => {
     mappedRow.email = row.email;
     mappedRow.date = row.date;
 
-    return mappedResult;
+    return mappedRow;
 }

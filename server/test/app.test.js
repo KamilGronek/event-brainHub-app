@@ -13,7 +13,6 @@ const app = makeApp.construct({
 });
 
 describe("POST /api/event", () => {
-
     describe("given a request body with all required data", () => {
         test("should respond with a 201 status code", async () => {
             existsEventByEmail.mockResolvedValue(false);
@@ -99,7 +98,7 @@ describe("POST /api/event", () => {
         test("should respond with a status code of 400 and gives message about unique email", async () => {
             existsEventByEmail.mockResolvedValue(true);
             const response = await request(app).post(eventUrl).send({
-                firstName : "ewfew",
+                firstName : "first",
                 lastName : "last",
                 email : "example@vp.com",
                 date :  "2017-06-15 09:34:21"
@@ -141,7 +140,6 @@ describe("POST /api/event", () => {
 })
 
 describe("GET /api/event", () => {
-
     test("should return all events", async () => {
         let data = [
             {

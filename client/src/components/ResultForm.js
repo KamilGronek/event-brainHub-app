@@ -1,16 +1,15 @@
 
-import React, {useState,useContext,useEffect } from 'react';
+import React, {useContext,useEffect } from 'react';
 import { FormContext } from './FormContext';
-import axios from "axios";
 import {handleError} from "./../Utils";
 
 
 function ResultForm() {
 
-      const {firstName,lastName,email,dataPicker,errors,resultsArray,
-        setFirstName,setLastName,setEmail,setDataPicker,setError,setResultsArray} = useContext(FormContext)
-      // const [resultsArray, setResultsArray] = useState([]);
-        console.log(dataPicker);
+      const {firstName,lastName,email,datePicker,errors,
+        setFirstName,setLastName,setEmail,setDatePicker,setErrors,setResultsArray} = useContext(FormContext)
+
+      const url = `http://localhost:8000/api/event`
 
       useEffect(() => {
         fetchEvents();
@@ -18,22 +17,27 @@ function ResultForm() {
 
 
     const fetchEvents =()=> {
-      axios.get(`http://localhost:8000/api/event`)
-        .then((response) => {
-          console.log(response)
-          setResultsArray(response.data);
+      fetch(`${url}`)
+       .then(response => {
+         return response.json();
+       })
+        .then((data) => {
+          setResultsArray(data);
         })
+        .catch((error) => {
+          console.log(error)
+        });
     }
 
-    const addResult =(e)=>{
+    const addResult =(e)=> {
       e.preventDefault();
-       fetch(`http://localhost:8000/api/event`,{
+       fetch(`${url}`,{
          method: "post",
          body: JSON.stringify({
           firstName: firstName,
           lastName: lastName,
           email:email,
-          date: dataPicker
+          date: datePicker
          }),
            headers: new Headers({
           "Content-Type": "application/json",
@@ -42,14 +46,14 @@ function ResultForm() {
        .then((response)=>{
          if(response.status === 201){
           console.log(response);
-          setError([])
+          setErrors([])
           fetchEvents();
           return;
          }
          if(response.status === 400){
           console.log(response)
            return response.json().then((res)=>{
-            setError(res.validationResult.errors);
+            setErrors(res.validationResult.errors);
             console.log(res.validationResult.errors)
            })
          }       
@@ -64,10 +68,9 @@ function ResultForm() {
  }
 
 return(
-  <div className="container">
+  <div className="container d-flex justify-content-center align-items-center">
     <form
-      style={{ borderRadius: "10px", width:"500px", padding: "0 40px" }}
-      className="m-5 border bg-light"
+      className="m-5 border bg-light form"
       onSubmit={addResult}
     >
       <h4 className="p-3 d-flex justify-content-center">BrainHub App</h4>
@@ -84,14 +87,6 @@ return(
         />
       </div>
       {handleErrorForField("firstName")}
-      {/* {console.log(errors)} */}
-      {/* {error ? (
-              <strong className="d-flex justify-content-center">
-                <span style={{ color: "red" }}>First name need</span>
-              </strong>
-            ) : (
-              ""
-      )} */}
       <div className="form-group">
         <label className="label">
           <b>Last name:</b>
@@ -105,16 +100,9 @@ return(
         />
       </div>
       {handleErrorForField("lastName")}
-      {/* {error ? (
-              <strong className="d-flex justify-content-center">
-                <span style={{ color: "red" }}>Last name need</span>
-              </strong>
-            ) : (
-              ""
-      )} */}
       <div className="form-group">
         <label className="label">
-          <b>e-mail:</b>
+          <b>E-mail:</b>
         </label>
         <input
           className="form-control"
@@ -127,26 +115,24 @@ return(
       {handleErrorForField("email")}
       <div className="form-group">
         <label className="label">
-          <b>Data Picker</b>
+          <b>Date Picker:</b>
         </label>
         <input
           style={{ cursor: "pointer" }}
           type="date"
           className="form-control"
           name="preparation_time"
-          value={dataPicker}
+          value={datePicker}
           id="settime"
           step="1"
-          onChange={(e) => setDataPicker(e.target.value)}
+          onChange={(e) => setDatePicker(e.target.value)}
         />
       </div>
-    
-      <div className="d-flex justify-content-center">
-        <button className=" btn btn-primary" type="submit">
+      <div className="d-flex justify-content-center button">
+        <button className="btn btn-primary" type="submit">
           Add
         </button>
       </div>
-      <br />
     </form>
   </div>
     )
