@@ -1,103 +1,103 @@
 # Wprowadzenie:
 
-Stworzyłem prosty formularz zaimplementowany w React'cie
-i połączyłem z API napisanym w Node.js (Express.js), z wykorzystaniem Bazy MySQL.
+I have created a simple form implemented in React.
+I connected to an API written in Node.js (Express.js) using a MySQL database.
 
-## Technologie:
+## Technology:
 
 -React: 17.0.2,
 -Node: 12.16.1,
 -Express: 4.17.1
 
-## Tworzenie bazy danych:
+## Database creation:
 
-Należy skorzystać z klienta bazy danych MySQL serwer phpMyAdmin,
-wejść na stronę : http://localhost/phpmyadmin/index.php,
-następnie w polu do zapytań(queries) - SQL, należy wkleić kod zapisany w folderze serwer/database.sql
+You should use the MySQL database client phpMyAdmin server,
+go to the website: http://localhost/phpmyadmin/index.php,
+then in the field for queries (queries) - SQL, paste the code saved in the server/database.sql folder
 
-## Uruchomienie aplikacji dla back-end'u:
+## Running the application for the back-end:
 
-Po pobraniu aplikacji, aby uruchomić serwer, w głównej ścieżce projektu, należy wpisać:
+After downloading the application, to start the server, in the main project path, enter:
 
 ```bash
 cd server
 ```
 
-następnie zainstalować zależności node.modules:
+then install ```node.modules``` dependencies:
 
 ```bash
 npm install
 ```
 
-następnie aby uruchowmić serwer:
+then to start the server:
 
 ```bash
 node server.js
 ```
 
-## Uruchomienie aplikacji dla front-end'u:
+## Launching the application for the front-end:
 
-Po uruchomienia aplikacji backendowej, aby uruchomić aplikacje frontendową, w nowym terminalu należy wpisać:
+After launching the backend application, to launch the frontend application, in the new terminal you need to type:
 
 ```bash
 cd client
 ```
 
-następnie zainstalować zależności node.modules:
+then install ```node.modules``` dependencies:
 
 ```bash
 npm install
 ```
 
-następnie uruchomić aplikacje:
+then to start the server:
 
 ```bash
 npm start
 ```
 
-## Testy dla back-endu/ server:
+## Tests for back-end/server:
 
-Ścieżka gdzie znajdują się testy: server/test/app.test.js
+Path where tests are located: server/test/app.test.js
 
-Robimy kilka testów dla metody GET/POST a w niej m.in:
-dla metody POST:
+We are doing a few tests for the GET/POST method, including:
+for the POST method:
 
-- testy dla tworzenia użytkownika - status 201,
-- testy dla obiektu json zawierającego event id
-- testy dla formatu jaki ma być zwracany z serwera
-- testy dla walidacji: (m.in dla pustych pól i dla  
-  nieistniejących pól)
+- tests for creating a user - status 201,
+- tests for json object containing event id
+- tests for the format to be returned from the server
+- tests for validation: (e.g. for empty fields and for
+   nonexistent fields)
 
-dla metody GET:
+for the GET method:
 
-- zwracanie wszystkich obiektów
+- returning all objects
 
-Aby uruchomić test należy w głównej ścieżce projektu pierw wpisać:
+To run the test, in the main project path, first enter:
 
 ```bash
 cd server
 ```
 
-a następnie komende dla testów:
+and then the test command:
 
 ```bash
 npx jest
 ```
 
-## Test dla front-endu/ client:
+## Test for front-end/client:
 
-Ścieżka gdzie znajduje się test: client/test/Utils.test.js
+Path where test is located: client/test/Utils.test.js
 
-Testujemy metodę, która nam renderuje komunikat błędu.
-Ze względu na prosty formularz do tworzenia eventu, stworzyłem tylko jeden test.
+We are testing a method that renders an error message to us.
+Due to the simple form for creating an event, I created only one test.
 
-Aby uruchomić test należy w głównej ścieżce projektu pierw wpisać:
+To run the test, in the main project path, first enter:
 
 ```bash
 cd client
 ```
 
-a następnie komende dla testu:
+and then the test command:
 
 ```bash
 npm test
