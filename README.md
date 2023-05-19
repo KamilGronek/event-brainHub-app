@@ -1,4 +1,4 @@
-# Wprowadzenie:
+# Introduction:
 
 I have created a simple form implemented in React.
 I connected to an API written in Node.js (Express.js) using a MySQL database.
